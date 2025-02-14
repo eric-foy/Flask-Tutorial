@@ -36,8 +36,13 @@ def index():
     return render_template('index.html', title='Home', user=user, posts=posts)
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET'])
 def login():
+    form = LoginForm()
+    return render_template('login.html', title='Sign In', form=form)
+
+@app.route('/login', methods=['POST'])
+def postLogin():
     form = LoginForm()
     if form.validate_on_submit():
         flash('Login requested for user {}, remember_me={}'.format(
